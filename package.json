@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "dev": "tsc -p tsconfig.json -w",
+    "dev": "tsc -p tsconfig-cjs.json -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
