@@ -2,6 +2,10 @@ import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const ROUTES = {
   MONITORING: '/rest/health',
+  SHORT_URLS: '/rest/v{:version}/short-urls',
+  SHORT_URL: '/rest/v{:version}/short-urls/{:shortCode}',
+  SHORTEN_URL: '/rest/v{:version}/short-urls/shorten',
+  SHORT_URL_TAGS: '/rest/v{:version}/short-urls/{:shortCode}/tags',
 }
 
 interface RouteParam {
@@ -13,6 +17,10 @@ export class ApiClient {
   public constructor(private instance: AxiosInstance) {}
 
   private replaceParams(route: keyof typeof ROUTES, params: Record<string, number | string> = {}): string {
+    params = {
+      version: 2,
+      ...params,
+    };
     const url = ROUTES[route];
     return Object.entries(params).reduce((acc, [key, value]) => {
       return acc.replace(`{:${key}}`, value.toString());
