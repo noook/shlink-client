@@ -1,4 +1,4 @@
 export interface ShlinkClientOptions {
-  url: string
-  token: string
+  url: string;
+  token: string;
 }

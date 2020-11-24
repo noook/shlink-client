@@ -6,11 +6,11 @@ const ROUTES = {
   SHORT_URL: '/rest/v{:version}/short-urls/{:shortCode}',
   SHORTEN_URL: '/rest/v{:version}/short-urls/shorten',
   SHORT_URL_TAGS: '/rest/v{:version}/short-urls/{:shortCode}/tags',
-}
+};
 
 interface RouteParam {
-  url: keyof typeof ROUTES
-  params?:  Record<string, number | string>
+  url: keyof typeof ROUTES;
+  params?: Record<string, number | string>;
 }
 
 export class ApiClient {

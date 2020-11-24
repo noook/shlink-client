@@ -29,7 +29,7 @@ export class ShlinkClient {
     this.client = new ApiClient(instance);
   }
 
-  public getShortUrls(options: ShortUrlGetOptions) {
+  public getShortUrls(options: ShortUrlGetOptions = {}) {
     return this.client.get<ShortUrlsGetResponse>({ url: 'SHORT_URLS' }, {
       params: options,
     })
@@ -41,7 +41,7 @@ export class ShlinkClient {
       .then(({ data }) => data);
   }
 
-  public editShortUrl(shortCode: string, options: Partial<Pick<ShortUrlOptions, 'longUrl' | 'validSince' | 'validUntil' | 'maxVisits' | 'validateUrl'>>, domain?: string) {
+  public editShortUrl(shortCode: string, options: Partial<Pick<ShortUrlOptions, 'longUrl' | 'validSince' | 'validUntil' | 'maxVisits' | 'validateUrl'>>, domain?: string): Promise<ShortUrl> {
     return this.client.patch({ url: 'SHORT_URL', params: { shortCode }}, options, {
       params: {
         domain,

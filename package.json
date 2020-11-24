@@ -1,12 +1,17 @@
 {
   "name": "shlink-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "email": "me@neilrichter.com",
     "name": "Neil Richter",
     "url": "https://nook.sh"
   },
   "description": "Shlink JavaScript API client",
+  "homepage": "https://github.com/noook/shlink-client",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noook/shlink-client.git"
+  },
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "files": [
@@ -20,7 +25,9 @@
   "keywords": [
     "shlink",
     "api",
-    "client"
+    "client",
+    "typescript",
+    "short-urls"
   ],
   "license": "MIT",
   "dependencies": {
