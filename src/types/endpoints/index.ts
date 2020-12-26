@@ -1,4 +1,5 @@
 export * from './monitoring';
+export * from './tags';
 
 export interface GenericError {
   type: string;

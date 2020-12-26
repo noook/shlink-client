@@ -2,10 +2,15 @@ import { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const ROUTES = {
   MONITORING: '/rest/health',
+
+  /* Short URLs */
   SHORT_URLS: '/rest/v{:version}/short-urls',
   SHORT_URL: '/rest/v{:version}/short-urls/{:shortCode}',
   SHORTEN_URL: '/rest/v{:version}/short-urls/shorten',
   SHORT_URL_TAGS: '/rest/v{:version}/short-urls/{:shortCode}/tags',
+
+  /* Tags */
+  LIST_TAGS: '/rest/v{:version}/tags',
 };
 
 interface RouteParam {

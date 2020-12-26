@@ -8,6 +8,7 @@ import {
   ShortUrl,
   ShortTagsResponse,
 } from './types/endpoints/short-urls';
+import { ListTagsOptions, TagsListResponse } from './types/endpoints';
 export class ShlinkClient {
   private url: string;
   private token: string;
@@ -77,5 +78,14 @@ export class ShlinkClient {
   public setShortUrlTags(shortCode: string, tags: string[]): Promise<ShortTagsResponse> {
     return this.client.put<ShortTagsResponse>({ url: 'SHORT_URL_TAGS', params: { shortCode }}, { tags })
       .then(({ data }) => data);
+  }
+
+  public listTags(options: ListTagsOptions<false>): Promise<TagsListResponse<ListTagsOptions<false>>>
+  public listTags(options: ListTagsOptions<true>): Promise<TagsListResponse<ListTagsOptions<true>>>
+  public listTags(options: ListTagsOptions = { withStats: false }): Promise<TagsListResponse<ListTagsOptions>> {
+    return this.client.get<{ tags: TagsListResponse<ListTagsOptions>}>({ url: 'LIST_TAGS' }, {
+      params: options,
+    })
+      .then(({ data }) => data.tags);
   }
 }
