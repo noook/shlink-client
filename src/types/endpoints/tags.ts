@@ -6,6 +6,7 @@ export type TagsListResponse<ReqOptions extends ListTagsOptions> = TagList & (Re
 
 export interface TagList {
   data: string[];
+  stats?: TagStats[];
 }
 
 export interface TagStats {
