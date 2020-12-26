@@ -83,9 +83,28 @@ export class ShlinkClient {
   public listTags(options: ListTagsOptions<false>): Promise<TagsListResponse<ListTagsOptions<false>>>
   public listTags(options: ListTagsOptions<true>): Promise<TagsListResponse<ListTagsOptions<true>>>
   public listTags(options: ListTagsOptions = { withStats: false }): Promise<TagsListResponse<ListTagsOptions>> {
-    return this.client.get<{ tags: TagsListResponse<ListTagsOptions>}>({ url: 'LIST_TAGS' }, {
+    return this.client.get<{ tags: TagsListResponse<ListTagsOptions>}>({ url: 'TAGS' }, {
       params: options,
     })
       .then(({ data }) => data.tags);
+  }
+
+  public renameTag(oldName: string, newName: string): Promise<{ tag: string }> {
+    return this.client.put({ url: 'TAGS' }, {
+      oldName,
+      newName,
+    })
+      .then(() => ({ tag: newName }));
+  }
+
+  public deleteTags(...tags: string[]) {
+    return this.client.delete({ url: 'TAGS' }, {
+      params: {
+        tags,
+      },
+    })
+      .then(() => ({
+        deleted: tags,
+      }));
   }
 }

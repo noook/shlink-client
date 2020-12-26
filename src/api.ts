@@ -10,7 +10,7 @@ const ROUTES = {
   SHORT_URL_TAGS: '/rest/v{:version}/short-urls/{:shortCode}/tags',
 
   /* Tags */
-  LIST_TAGS: '/rest/v{:version}/tags',
+  TAGS: '/rest/v{:version}/tags',
 };
 
 interface RouteParam {
