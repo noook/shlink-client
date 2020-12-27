@@ -8,7 +8,7 @@ import {
   ShortUrl,
   ShortTagsResponse,
 } from './types/endpoints/short-urls';
-import { ListTagsOptions, TagsListResponse } from './types/endpoints';
+import { DomainsListItem, DomainsListResponse, ListTagsOptions, TagsListResponse } from './types/endpoints';
 export class ShlinkClient {
   private url: string;
   private token: string;
@@ -106,5 +106,10 @@ export class ShlinkClient {
       .then(() => ({
         deleted: tags,
       }));
+  }
+
+  public getDomains(): Promise<{ domains: DomainsListItem[] }> {
+    return this.client.get<DomainsListResponse>({ url: 'DOMAINS' })
+      .then(({ data }) => ({ domains: data.domains.data }));
   }
 }

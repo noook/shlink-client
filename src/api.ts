@@ -11,6 +11,9 @@ const ROUTES = {
 
   /* Tags */
   TAGS: '/rest/v{:version}/tags',
+
+  /* Domains */
+  DOMAINS: '/rest/v{:version}/domains',
 };
 
 interface RouteParam {
