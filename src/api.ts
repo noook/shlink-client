@@ -12,6 +12,11 @@ const ROUTES = {
   /* Tags */
   TAGS: '/rest/v{:version}/tags',
 
+  /* Visits */
+  VISITS: '/rest/v{:version}/visits',
+  LINK_VISITS: '/rest/v{:version}/short-urls/{:shortCode}/visits',
+  TAG_VISITS: '/rest/v{:version}/tags/{:tag}/visits',
+
   /* Domains */
   DOMAINS: '/rest/v{:version}/domains',
 

@@ -10,7 +10,8 @@ import {
   QRCodeOptions,
   QRCodeDefaultOptions,
 } from './types/endpoints/short-urls';
-import { DomainsListItem, DomainsListResponse, ListTagsOptions, TagsListResponse } from './types/endpoints';
+import { DomainsListItem, DomainsListResponse, ListTagsOptions, PaginationOptions, TagsListResponse, VisitData, VisitsPaginationOptions, VisitsStats } from './types/endpoints';
+import { Paginated } from './types/endpoints/utils';
 export class ShlinkClient {
   private url: string;
   private token: string;
@@ -85,6 +86,25 @@ export class ShlinkClient {
   public setShortUrlTags(shortCode: string, tags: string[]): Promise<ShortTagsResponse> {
     return this.client.put<ShortTagsResponse>({ url: 'SHORT_URL_TAGS', params: { shortCode }}, { tags })
       .then(({ data }) => data);
+  }
+
+  public countVisits(): Promise<VisitsStats> {
+    return this.client.get<{ visits: VisitsStats }>({ url: 'VISITS' })
+      .then(({ data }) => data.visits);
+  }
+
+  public getLinkVisits(shortCode: string, options: VisitsPaginationOptions = {}): Promise<Paginated<VisitData>> {
+    return this.client.get<{ visits: Paginated<VisitData> }>({ url: 'LINK_VISITS', params: { shortCode }}, {
+      params: options,
+    })
+      .then(({ data }) => data.visits);
+  }
+
+  public getTagVisits(tag: string, options: PaginationOptions = {}): Promise<Paginated<VisitData>> {
+    return this.client.get<{ visits: Paginated<VisitData> }>({ url: 'TAG_VISITS', params: { tag }}, {
+      params: options,
+    })
+      .then(({ data }) => data.visits);
   }
 
   public listTags(options: ListTagsOptions<false>): Promise<TagsListResponse<ListTagsOptions<false>>>

@@ -300,3 +300,53 @@ interface QRCodeOptions {
 #### Response
 
 An objet containing the MIME type of the QR Code, and the data in the requested format
+### client#countVisits()
+
+Get general visits stats not linked to one specific short URL.
+
+#### Response
+
+Returns an object containing general data about link statistics
+
+### client#getLinkVisits(shortCode, options)
+
+Get the list of visits on the short URL behind provided short code.
+
+#### Parameters
+
+`shortCode`: The short code to which you want to get the visits stats.
+
+`options`:
+```ts
+interface PaginationOptions {
+  startDate?: string; // ISO-8601 date format
+  endDate?: string; // ISO-8601 date format
+  page?: number; // Page number, defaults to 1
+  itemsPerPage?: number; // Items per page, defaults to all results
+}
+```
+
+#### Response
+
+A paginated response containing visits stats for the given short code.
+### client#getTagVisits(tag, options)
+
+Get the list of visits on any short URL which is tagged with provided tag.
+
+#### Parameters
+
+`shortCode`: The short code to which you want to get the visits stats.
+
+`options`:
+```ts
+interface PaginationOptions {
+  startDate?: string; // ISO-8601 date format
+  endDate?: string; // ISO-8601 date format
+  page?: number; // Page number, defaults to 1
+  itemsPerPage?: number; // Items per page, defaults to all results
+}
+```
+
+#### Response
+
+A paginated response containing visits stats for the given tag.
