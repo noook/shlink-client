@@ -215,5 +215,88 @@ Edit the tags on URL identified by provided short code.
 
 #### Response
 
-Returns the shortCode's new tags..
+Returns the shortCode's new tags.
 
+### client#listTags(options)
+
+List all available tags
+
+#### Parameters
+
+`options`:
+```ts
+interface ListTagsOptions {
+  // Whether to add additional details about the tags visits / links
+  withStats: boolean;
+}
+```
+
+#### Response
+
+Returns the list of available tags, and the details if requested
+
+### client#renameTag(oldName, newName)
+
+Renames a tag
+
+#### Parameters
+
+`oldName`: string of the previous tag name
+
+`newName`: string of the new tag name
+
+
+#### Response
+
+An object with the new tag name, if succeeded.
+
+### client#deleteTags(...tags)
+
+Deletes tags
+
+#### Parameters
+
+`tags`: Takes as many arguments as tags to remove. Inexistant tags won't throw error.
+
+#### Response
+
+An object with the list of deleted tags
+
+### client#getDomains()
+
+Lists available domains
+
+#### Response
+
+Returns the list of available domains to create URLs
+
+### client#getPixel(shortCode)
+
+Generates a 1px transparent image which can be used to track emails with a short URL
+
+#### Parameters
+
+`shortCode`: The short code to which you want to get the pixel.
+
+#### Response
+
+A base64 encoded string of the pixel
+### client#getQR(shortCode, options)
+
+Generates a QR code image pointing to a short URL
+
+#### Parameters
+
+`shortCode`: The short code to which you want to get the QR Code.
+
+`options`:
+```ts
+interface QRCodeOptions {
+  format?: 'png' | 'svg'; // Format of the response (defaults to png)
+  size?: number; // size in px of the QR Code (defaults to 300px)
+} 
+```
+
+#### Response
+
+An objet containing the MIME type of the QR Code, and the data in the requested format
