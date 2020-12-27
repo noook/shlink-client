@@ -7,6 +7,8 @@ import {
   ShortUrlsGetResponse,
   ShortUrl,
   ShortTagsResponse,
+  QRCodeOptions,
+  QRCodeDefaultOptions,
 } from './types/endpoints/short-urls';
 import { DomainsListItem, DomainsListResponse, ListTagsOptions, TagsListResponse } from './types/endpoints';
 export class ShlinkClient {
@@ -28,6 +30,11 @@ export class ShlinkClient {
     }, (error) => Promise.reject(error));
 
     this.client = new ApiClient(instance);
+  }
+
+  public healthCheck() {
+    return this.client.get<{ status: number | string }>({ url: 'MONITORING' })
+      .then(({ data }) => data);
   }
 
   public getShortUrls(options: ShortUrlGetOptions = {}) {
@@ -97,7 +104,7 @@ export class ShlinkClient {
       .then(() => ({ tag: newName }));
   }
 
-  public deleteTags(...tags: string[]) {
+  public deleteTags(...tags: string[]): Promise<{ deleted: string[] }> {
     return this.client.delete({ url: 'TAGS' }, {
       params: {
         tags,
@@ -111,5 +118,23 @@ export class ShlinkClient {
   public getDomains(): Promise<{ domains: DomainsListItem[] }> {
     return this.client.get<DomainsListResponse>({ url: 'DOMAINS' })
       .then(({ data }) => ({ domains: data.domains.data }));
+  }
+
+  public getPixel(shortCode: string): Promise<string> {
+    return this.client.get<string>({ url: 'PIXEL', params: { shortCode }})
+      .then(({ data }) => data);
+  }
+
+  public getQR(shortCode: string, options?: QRCodeOptions): Promise<{ format: string; data: string }> {
+    return this.client.get({ url: 'QR_CODE', params: { shortCode }}, {
+      params: {
+        ...QRCodeDefaultOptions,
+        ...options,
+      }
+    })
+      .then(({ data, headers }) => ({
+        format: headers['content-type'],
+        data,
+      }))
   }
 }

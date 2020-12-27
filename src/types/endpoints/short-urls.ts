@@ -51,3 +51,13 @@ export interface ShortUrlOptions {
 export interface ShortTagsResponse {
   tags: string[];
 }
+
+export interface QRCodeOptions {
+  format?: 'png' | 'svg';
+  size?: number;
+}
+
+export const QRCodeDefaultOptions: QRCodeOptions = {
+  format: 'png',
+  size: 300,
+} as const;

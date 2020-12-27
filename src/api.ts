@@ -14,6 +14,10 @@ const ROUTES = {
 
   /* Domains */
   DOMAINS: '/rest/v{:version}/domains',
+
+  /* URL-Shortener */
+  PIXEL: '/{:shortCode}/track',
+  QR_CODE: '/{:shortCode}/qr-code',
 };
 
 interface RouteParam {
