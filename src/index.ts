@@ -107,8 +107,9 @@ export class ShlinkClient {
       .then(({ data }) => data.visits);
   }
 
-  public listTags(options: ListTagsOptions<false>): Promise<TagsListResponse<ListTagsOptions<false>>>
-  public listTags(options: ListTagsOptions<true>): Promise<TagsListResponse<ListTagsOptions<true>>>
+  public listTags(): Promise<TagsListResponse<ListTagsOptions<false>>>
+  public listTags(options?: ListTagsOptions<false>): Promise<TagsListResponse<ListTagsOptions<false>>>
+  public listTags(options?: ListTagsOptions<true>): Promise<TagsListResponse<ListTagsOptions<true>>>
   public listTags(options: ListTagsOptions = { withStats: false }): Promise<TagsListResponse<ListTagsOptions>> {
     return this.client.get<{ tags: TagsListResponse<ListTagsOptions>}>({ url: 'TAGS' }, {
       params: options,
