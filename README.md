@@ -183,7 +183,7 @@ interface ShortUrlOptions {
   domain?: string;
   // Length of the code
   shortCodeLength?: number;
-  // Validate a status 20x and return before redirecting
+  // Tells if shlink should validate a status 20x is returned (after following redirects) when trying to shorten a URL
   validateUrl?: boolean;
 }
 ```
