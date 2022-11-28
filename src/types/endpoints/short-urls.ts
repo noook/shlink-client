@@ -1,5 +1,6 @@
 export interface ShortUrlGetOptions {
   page?: number;
+  itemsPerPage?: number;
   searchTerm?: string;
   tags?: string[];
   orderBy?:  'longUrl-ASC' | 'longUrl-DESC' | 'shortCode-ASC' | 'shortCode-DESC' | 'dateCreated-ASC' | 'dateCreated-DESC' | 'visits-ASC' | 'visits-DESC';
@@ -20,6 +21,7 @@ export interface ShortUrl {
     maxVisits: number;
   };
   domain: string | null;
+  title: string | null;
 }
 
 export interface ShortUrlsGetResponse {
